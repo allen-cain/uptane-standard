@@ -520,12 +520,16 @@ The Timestamp metadata SHALL contain the following information:
 
 ### Repository mapping metadata {#repo_mapping_meta}
 
-Repository mapping metadata informs a primary ECU about which repositories to trust for images or image paths. Repository mapping metadata MUST be present on all primary ECUs, and MUST contain the following information:
+Repository mapping metadata serves two purposes:
+* It informs a full verification ECU about which group of repositories to require agreement from for image metadata.
+* It lists URLs for each repository, primarily useful to Primary ECUs.
+
+Repository mapping metadata MUST be present on all full verification ECUs, and MUST contain the following information:
 
 * A list of repository names and one or more URLs at which the named repository can be accessed. At a minimum, this MUST include the Director and Image repositories.
 * A list of mappings of image paths to repositories, each of which contains:
     * A list of image paths. Image paths MAY be expressed using wildcards, or by enumerating a list, or a combination of the two.
-    * A list of repositories that MUST sign the targets metadata for the image paths.
+    * A list of repositories that a client must have matching image metadata from all of, in order to verify that image.
 
 For example, in the most basic Uptane case, the repository mapping metadata would contain:
 
